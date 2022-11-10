@@ -12,7 +12,7 @@ import numpy as np
 with open('Text_data.pickle', 'rb') as file:
     train_org_data_map = pickle.load(file)
 
-step = 16
+step = 6
 
 def Design_emotion_change(train_org_data_map):
     no_change = 0
@@ -54,28 +54,34 @@ def Train_data(train_map):
     input_traindata_z = []
     input_traindata_x_1 = []
     input_traindata_x_2 = []
+    input_traindata_x_3 = []
     input_traindata_y_1 = []
     for i in range(len(train_map)):
         input_trainlabel_1 = []
         input_trainlabel_2 = []
         input_trainlabel_3 = []
+        input_traindata_2 = []
         input_traindata_3 = []
         input_traindata_4 = []
         input_traindata_5 = []
         for x in range(len(train_map[i]) - step):
+            input_train_spec_1 = []
             input_train_tran_1 = []
             input_train_trad_1 = []
             input_train_name_1 = []
             for y in range(step):
+                a = train_map[i][x + y]['spec_data']
                 b = train_map[i][x + y]['transcr_data']
                 c = train_map[i][x + y]['trad_data']
                 d = train_map[i][x + y]['id']
+                input_train_spec_1.append(a)
                 input_train_tran_1.append(b)
                 input_train_trad_1.append(c)
                 input_train_name_1.append(d)
             input_trainlabel_1.append(train_map[i][x + step]['Self_Emotion_Change'])
             input_trainlabel_2.append(train_map[i][x + step]['label'])
             input_trainlabel_3.append(train_map[i][x + step]['Inter_Emotion_Change'])
+            input_traindata_2.append(input_train_spec_1)
             input_traindata_3.append(input_train_trad_1)
             input_traindata_4.append(input_train_name_1)
             input_traindata_5.append(input_train_tran_1)
@@ -83,6 +89,7 @@ def Train_data(train_map):
         input_traindata_x_1.append(input_trainlabel_1)
         input_traindata_x.append(input_trainlabel_2)
         input_traindata_x_2.append(input_trainlabel_3)
+        input_traindata_x_3.append(input_traindata_2)
         input_traindata_y.append(input_traindata_3)
         input_traindata_z.append(input_traindata_4)
         input_traindata_y_1.append(input_traindata_5)
@@ -102,8 +109,9 @@ def Train_data(train_map):
                     input_traindata_x[i][x] = 2
                 #a['label_emotion_change'] = int(input_traindata_x_1[i][x])
                 a['label_emotion_change'] = int(input_traindata_x_2[i][x])
-                a['label_emotion'] = int(input_traindata_x[i][x] - 1)
                 a['trad_data'] = input_traindata_y[i][x]
+                a['label_emotion'] = int(input_traindata_x[i][x] - 1)
+                a['spec_data'] = input_traindata_x_3[i][x]
                 a['transcr_data'] = input_traindata_y_1[i][x]
                 a['id'] = input_traindata_z[i][x]
                 a['section_id'] = input_traindata_z[i][x][0][4]

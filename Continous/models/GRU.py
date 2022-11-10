@@ -14,6 +14,27 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+class Utterance_net(nn.Module):
+    def __init__(self, input_size, args):
+        super(Utterance_net, self).__init__()
+        self.input_size = input_size
+        self.hidden_dim = args.hidden_layer
+        self.num_layers = args.dia_layers
+        #  dropout
+        self.dropout = nn.Dropout(args.dropout)
+        # gru
+        self.bigru = nn.GRU(input_size, self.hidden_dim,
+                            batch_first=True, num_layers=self.num_layers, bidirectional=True)
+    def forward(self, indata):
+        embed = self.dropout(indata)
+        # gru
+        gru_out, gru_hid = self.bigru(embed)
+        gru_hid = torch.transpose(gru_hid, 1, 2)
+        gru_out = torch.transpose(gru_out, 1, 2)
+        gru_out = F.tanh(gru_out)
+        gru_out = F.max_pool1d(gru_out, gru_out.size(2)).squeeze(2)
+        gru_out = F.tanh(gru_out)
+        return gru_out, gru_hid
 
 class Utterance_net(nn.Module):
     def __init__(self, input_size, args):

@@ -41,7 +41,7 @@ parser.add_argument('--dia_layers', type=int, default=2)
 parser.add_argument('--hidden_layer', type=int, default=256)
 parser.add_argument('--out_class', type=int, default=4)
 parser.add_argument('--out_class_1', type=int, default=2)
-parser.add_argument('--utt_insize', type=int, default=856)
+parser.add_argument('--utt_insize', type=int, default=120)
 args = parser.parse_args()
 
 torch.manual_seed(args.seed)
@@ -62,27 +62,31 @@ def Train(epoch,criterion_two_class):
     # data_3_1: input_train_data_tran/2,torch.Size([1, 3, 1, 768])
     # label: emotion_label
     # target_1: emotion_change_label
-    for batch_idx, (data_1, data_2,data_3,data_1_1,data_2_1,data_3_1, target, target_1) in enumerate(train_loader):
+    for batch_idx, (data_1, data_2,data_3,data_1_1,data_2_1,data_3_1, data_1_2,data_2_2,data_3_2, target, target_1) in enumerate(train_loader):
         if args.cuda:
-            data_1, data_2, data_3, data_1_1, data_2_1, data_3_1, target, target_1 = data_1.cuda(), data_2.cuda(), data_3.cuda(), data_1_1.cuda(), data_2_1.cuda(), data_3_1.cuda(), target.cuda(),target_1.cuda()
+            data_1, data_2, data_3, data_1_1, data_2_1, data_3_1, data_1_2,data_2_2,data_3_2, target, target_1 = data_1.cuda(), data_2.cuda(), data_3.cuda(), data_1_1.cuda(), data_2_1.cuda(), data_3_1.cuda(), data_1_2.cuda(), data_2_2.cuda(), data_3_2.cuda(),target.cuda(),target_1.cuda()
         # data (batch_size, step, 88)
         # target (batch_size, 1)
-        data_1, data_2, data_3, data_1_1, data_2_1, data_3_1, target, target_1 = Variable(data_1), Variable(data_2),Variable(data_3),Variable(data_1_1),Variable(data_2_1),Variable(data_3_1),Variable(target),Variable(target_1)
+        data_1, data_2, data_3, data_1_1, data_2_1, data_3_1,data_1_2,data_2_2,data_3_2, target, target_1 = Variable(data_1), Variable(data_2),Variable(data_3),Variable(data_1_1),Variable(data_2_1),Variable(data_3_1),Variable(data_1_2),Variable(data_2_2),Variable(data_3_2),Variable(target),Variable(target_1)
 
         target = target.squeeze()
         target_1 = target_1.squeeze()
-
+        # Spec
         data_1 = data_1.squeeze()
         data_2 = data_2.squeeze()
         data_3 = data_3.squeeze()
+        # opensmile
         data_1_1 = data_1_1.squeeze()
         data_2_1 = data_2_1.squeeze()
         data_3_1 = data_3_1.squeeze()
+        # Bert
+        data_1_2 = data_1_2.squeeze()
+        data_2_2 = data_2_2.squeeze()
+        data_3_2 = data_3_2.squeeze()
 
-        #print(data_1.size())
-        #print(data_1_1.size())
-        #print(data_3.size())
-        #print(data_3_1.size())
+        print(data_1.size())
+        print(data_2.size())
+        print(data_3.size())
 
         Gru_input_1 = torch.cat((data_2,data_2_1), 2)
         Gru_input_2 = torch.cat((data_3,data_3_1), 2)
