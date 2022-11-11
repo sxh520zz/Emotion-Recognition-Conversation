@@ -8,14 +8,6 @@ import torch
 import numpy as np
 import torch.utils.data as Data
 import torch.utils.data.dataset as Dataset
-from sklearn import preprocessing
-import torch.optim as optim
-from torch.autograd import Variable
-from models import Utterance_net
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import recall_score
-from sklearn.model_selection import KFold
-
 
 class subDataset(Dataset.Dataset):
     def __init__(self,Data_1,Data_2,Data_3,Label,Label_1):
@@ -30,18 +22,10 @@ class subDataset(Dataset.Dataset):
         data_1 = self.Data_1[item]
         data_1_1 = self.Data_2[item]
         data_1_2 = self.Data_3[item]
-        data_2 = []
         data_2_1 = []
         data_2_2 = []
-        data_3 = []
         data_3_1 = []
         data_3_2 = []
-
-        for i in range(len(data_1)):
-            if(i % 2 == 0):
-                data_2.append(data_1[i])
-            else:
-                data_3.append(data_1[i])
 
         for i in range(len(data_1_1)):
             if(i % 2 == 0):
@@ -55,23 +39,19 @@ class subDataset(Dataset.Dataset):
             else:
                 data_3_2.append(data_1_2[i])
 
-        data_1 = torch.Tensor(data_1)
-        data_2 = torch.Tensor(data_2)
-        data_3 = torch.Tensor(data_3)
+        data_1 = torch.Tensor(np.array((data_1)))
+        data_1_1 = torch.Tensor(np.array((data_1_1)))
+        data_2_1 = torch.Tensor(np.array((data_2_1)))
+        data_3_1 = torch.Tensor(np.array((data_3_1)))
 
-        data_1_1 = torch.Tensor(data_1_1)
-        data_2_1 = torch.Tensor(data_2_1)
-        data_3_1 = torch.Tensor(data_3_1)
-
-
-        data_1_2 = torch.Tensor(data_1_2)
-        data_2_2 = torch.Tensor(data_2_2)
-        data_3_2 = torch.Tensor(data_3_2)
+        data_1_2 = torch.Tensor(np.array((data_1_2)))
+        data_2_2 = torch.Tensor(np.array((data_2_2)))
+        data_3_2 = torch.Tensor(np.array((data_3_2)))
 
         label = torch.Tensor(self.Label[item])
         label_1 = torch.Tensor(self.Label_1[item])
 
-        return data_1,data_2,data_3,data_1_1,data_2_1,data_3_1,data_1_2,data_2_2,data_3_2,label,label_1
+        return data_1,data_1_1,data_2_1,data_3_1,data_1_2,data_2_2,data_3_2,label,label_1
 
 def Padding(args,data):
     a = [0.0 for i in range(args.utt_insize)]
@@ -152,15 +132,6 @@ def Get_data(data,train,test,args):
         while (i < w):
             test_data.append(test_data[0])
             i = i + 1
-    '''
-    add_data = []
-    for i in range(len(train_data)):
-        if(train_data[i]['label_emotion_change'] == 0):
-            add_data.append(data[i])
-    for i in range(len(add_data)):
-        train_data.extend(add_data[i])
-    '''
-
 
     print(len(train_data))
     print(len(test_data))
