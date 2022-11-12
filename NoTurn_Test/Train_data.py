@@ -13,76 +13,151 @@ with open('Text_data.pickle', 'rb') as file:
     train_org_data_map = pickle.load(file)
 
 Turn = 6
+for y in range(Turn):
+    print(y)
 
 def remove_nested_list(listt):
-    for index, value in enumerate(reversed(listt)):
-        if isinstance(value, list) and value != []:
-            remove_nested_list(value)
-        elif isinstance(value, list) and len(value) == 0:
-            listt.remove(value)
+    while [] in listt:  # 判断是否有空值在列表中
+        listt.remove([])  # 如果有就直接通过remove删除
+    return listt
 
 def Design_Turn(train_org_data):
     Turn_Data = []
     for i in range(len(train_org_data)):
-        data_turn_level = [[] for _ in range(100)]
+        data_turn_level = [[] for _ in range(500)]
         Turn_utt = 0
         for x in range(len(train_org_data[i])):
             if (x == 0):
                 data_turn_level[Turn_utt].append(train_org_data[i][x])
-            elif(train_org_data[i][x]['id'][-4] == data_turn_level[Turn_utt]['id'][-4]):
+            elif(train_org_data[i][x]['id'][-4] == data_turn_level[Turn_utt][0]['id'][-4]):
                 data_turn_level[Turn_utt].append(train_org_data[i][x])
+
             else:
                 Turn_utt = Turn_utt + 1
                 data_turn_level[Turn_utt].append(train_org_data[i][x])
         Turn_Dia = remove_nested_list(data_turn_level)
         Turn_Data.append(Turn_Dia)
-
     return Turn_Data
 
 def Design_emotion_change(train_org_data_map):
     no_change = 0
     change = 0
-    a= []
     for i in range(len(train_org_data_map)):
-        x = []
         for j in range(2,len(train_org_data_map[i])):
-            if(train_org_data_map[i][j]['label'] == train_org_data_map[i][j -2]['label']):
-                train_org_data_map[i][j]['Self_Emotion_Change'] = 0
-                no_change = no_change+1
-                #x.append(train_org_data_map[i][j])
+            if(len(train_org_data_map[i][j]) == 1):
+                if(train_org_data_map[i][j][0]['label'] == train_org_data_map[i][j -2][-1]['label']):
+                    train_org_data_map[i][j][0]['Self_Emotion_Change'] = 0
+                    no_change = no_change+1
+                else:
+                    train_org_data_map[i][j][0]['Self_Emotion_Change'] = 1
+                    change = change + 1
+                if(train_org_data_map[i][j][0]['label'] == train_org_data_map[i][j -1][-1]['label']):
+                    train_org_data_map[i][j][0]['Inter_Emotion_Change'] = 0
+                    no_change = no_change+1
+                else:
+                    train_org_data_map[i][j][0]['Inter_Emotion_Change'] = 1
+                    change = change + 1
             else:
-                train_org_data_map[i][j]['Self_Emotion_Change'] = 1
-                change = change + 1
-                #x.append(train_org_data_map[i][j])
-            if(train_org_data_map[i][j]['label'] == train_org_data_map[i][j -1]['label']):
-                train_org_data_map[i][j]['Inter_Emotion_Change'] = 0
-                no_change = no_change+1
-                x.append(train_org_data_map[i][j])
-            else:
-                train_org_data_map[i][j]['Inter_Emotion_Change'] = 1
-                change = change + 1
-                x.append(train_org_data_map[i][j])
-
-
-        a.append(x)
-
+                for y in range(len(train_org_data_map[i][j])):
+                    if(y == 0):
+                        if (train_org_data_map[i][j][y]['label'] == train_org_data_map[i][j - 2][-1]['label']):
+                            train_org_data_map[i][j][y]['Self_Emotion_Change'] = 0
+                            no_change = no_change + 1
+                        else:
+                            train_org_data_map[i][j][y]['Self_Emotion_Change'] = 1
+                            change = change + 1
+                        if (train_org_data_map[i][j][y]['label'] == train_org_data_map[i][j - 1][-1]['label']):
+                            train_org_data_map[i][j][y]['Inter_Emotion_Change'] = 0
+                            no_change = no_change + 1
+                        else:
+                            train_org_data_map[i][j][y]['Inter_Emotion_Change'] = 1
+                            change = change + 1
+                    else:
+                        if (train_org_data_map[i][j][y]['label'] == train_org_data_map[i][j][y-1]['label']):
+                            train_org_data_map[i][j][y]['Self_Emotion_Change'] = 0
+                            no_change = no_change + 1
+                        else:
+                            train_org_data_map[i][j][y]['Self_Emotion_Change'] = 1
+                            change = change + 1
+                        if (train_org_data_map[i][j][y]['label'] == train_org_data_map[i][j - 1][-1]['label']):
+                            train_org_data_map[i][j][0]['Inter_Emotion_Change'] = 0
+                            no_change = no_change + 1
+                        else:
+                            train_org_data_map[i][j][y]['Inter_Emotion_Change'] = 1
+                            change = change + 1
+    train_data = []
+    for i in range(len(train_org_data_map)):
+        train_data_1 = []
+        for j in range(len(train_org_data_map[i])):
+            train_data_1.append(train_org_data_map[i][j][2:])
+        train_data.append(train_data_1)
     print(no_change)
     print(change)
     print(no_change+change)
-    return a
+    return train_data
 
 def Train_data(train_map):
     num = 0
     for i in range(len(train_map)):
-        for x in range(len(train_map[i]) - Turn):
-            for y in range(Turn):
-                a = train_map[i][x + y]['spec_data']
-                b = train_map[i][x + y]['transcr_data']
-                c = train_map[i][x + y]['trad_data']
-                d = train_map[i][x + y]['id']
+        for j in range(len(train_map[i]) - Turn):
+            if(len(train_map[i][j + Turn]) == 1):
+                self_information = []
+                inter_information = []
+                context_information = []
+                for x in range(Turn):
+                    for y in range(len(train_map[i][j + x])):
+                        if (x%2 == 0):
+                            self_information.append(train_map[i][j + x][y])
+                            context_information.append(train_map[i][j + x][y])
+                        else:
+                            inter_information.append(train_map[i][j + x][y])
+                            context_information.append(train_map[i][j + x][y])
+                data = {}
+                data['self_information'] = self_information
+                data['inter_information'] = inter_information
+                data['context_information'] = context_information
+                data['label'] = train_map[i][j + Turn][0]
+            else:
+                for w in range(len(train_map[i][j + Turn])):
+                    if(w == 0):
+                        self_information = []
+                        inter_information = []
+                        context_information = []
+                        for x in range(Turn):
+                            for y in range(len(train_map[i][j + x])):
+                                if (x % 2 == 0):
+                                    self_information.append(train_map[i][j + x][y])
+                                    context_information.append(train_map[i][j + x][y])
+                                else:
+                                    inter_information.append(train_map[i][j + x][y])
+                                    context_information.append(train_map[i][j + x][y])
+                        data = {}
+                        data['self_information'] = self_information
+                        data['inter_information'] = inter_information
+                        data['context_information'] = context_information
+                        data['label'] = train_map[i][j + Turn][0]
+                    else:
+                        self_information = []
+                        inter_information = []
+                        context_information = []
+                        for x in range(Turn):
+                            for y in range(len(train_map[i][j + x])):
+                                if (x % 2 == 0):
+                                    self_information.append(train_map[i][j + x][y])
+                                    context_information.append(train_map[i][j + x][y])
+                                else:
+                                    inter_information.append(train_map[i][j + x][y])
+                                    context_information.append(train_map[i][j + x][y])
+                        for wx in range(w):
+                            self_information.append(train_map[i][j + x][wx])
+                            context_information.append(train_map[i][j + x][wx])
+                        data = {}
+                        data['self_information'] = self_information
+                        data['inter_information'] = inter_information
+                        data['context_information'] = context_information
+                        data['label'] = train_map[i][j + Turn][0]
 
     print(num)
-
 
     label_list= [1,2,3,4,5]
     num = 0
@@ -144,7 +219,7 @@ def Train_data(train_map):
 
 train_org_data = Design_Turn(train_org_data_map)
 
-#train_org_data_map = Design_emotion_change(train_org_data_map)
+train_org_data_map = Design_emotion_change(train_org_data)
 Train_data = Train_data(train_org_data_map)
 file = open('Train_data.pickle', 'wb')
 pickle.dump(Train_data, file)
