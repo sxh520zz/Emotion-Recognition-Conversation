@@ -9,7 +9,7 @@ import pickle
 import math
 import numpy as np
 # reload a file to a variable
-with open('Text_data.pickle', 'rb') as file:
+with open('../Feature/Text_data.pickle', 'rb') as file:
     train_org_data_map = pickle.load(file)
 
 step = 6
@@ -107,6 +107,7 @@ def Train_data(train_map):
                 input_traindata_1_1.append(a)
                 num = num + 1
         traindata_1.append(input_traindata_1_1)
+    print('Train Data:')
     print(num)
     data_1 = []
     data_2 = []

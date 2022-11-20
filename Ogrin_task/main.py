@@ -40,7 +40,7 @@ parser.add_argument('--seed', type=int, default=1111)
 parser.add_argument('--dia_layers', type=int, default=2)
 parser.add_argument('--hidden_layer', type=int, default=256)
 parser.add_argument('--out_class', type=int, default=4)
-parser.add_argument('--utt_insize', type=int, default=88)
+parser.add_argument('--utt_insize', type=int, default=856)
 args = parser.parse_args()
 
 torch.manual_seed(args.seed)
@@ -85,13 +85,13 @@ def Train(epoch):
         #print(Gru_input_2.size())
         #print(Gru_input_3.size())
 
-        dia_out_a, dia_hid_a = dia_net_a(data_2)
-        dia_out_b, dia_hid_b = dia_net_b(data_3)
+        dia_out_a, dia_hid_a = dia_net_a(Gru_input_1)
+        dia_out_b, dia_hid_b = dia_net_b(Gru_input_2)
 
         # print(dia_out_a.size())
         # print(dia_hid_a.size())
 
-        dia_out_all, _ = dia_net_all(data_1)
+        dia_out_all, _ = dia_net_all(Gru_input_3)
         line_input_1 = torch.cat((dia_out_a,dia_out_b), 1)
         line_input = torch.cat((line_input_1,dia_out_all), 1)
         line_out = output_net(line_input)
@@ -162,13 +162,13 @@ def Test():
             # print(Gru_input_2.size())
             # print(Gru_input_3.size())
 
-            dia_out_a, dia_hid_a = dia_net_a(data_2)
-            dia_out_b, dia_hid_b = dia_net_b(data_3)
+            dia_out_a, dia_hid_a = dia_net_a(Gru_input_1)
+            dia_out_b, dia_hid_b = dia_net_b(Gru_input_2)
 
             # print(dia_out_a.size())
             # print(dia_hid_a.size())
 
-            dia_out_all, _ = dia_net_all(data_1)
+            dia_out_all, _ = dia_net_all(Gru_input_3)
             line_input_1 = torch.cat((dia_out_a, dia_out_b), 1)
             line_input = torch.cat((line_input_1, dia_out_all), 1)
             line_out = output_net(line_input)

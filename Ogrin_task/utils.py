@@ -118,6 +118,9 @@ def Get_data(data,train,test,args):
     for i in range(len(test)):
         test_data.extend(data[test[i]])
 
+    print(len(train_data))
+    print(len(test_data))
+
     org_len = len(test_data)
     if (len(test_data) % args.batch_size != 0):
         w = args.batch_size - len(test_data) % args.batch_size
@@ -134,8 +137,7 @@ def Get_data(data,train,test,args):
     '''
 
 
-    print(len(train_data))
-    print(len(test_data))
+
     input_train_data_trad,input_train_data_tran,input_train_label,_,_ = Feature(args,train_data)
     input_test_data_trad,input_test_data_tran,input_test_label,input_test_data_id,input_test_label_org = Feature(args,test_data)
 
