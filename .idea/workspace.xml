@@ -2,25 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc4b58d5-5a13-4b93-bad7-2ef536ad0111" name="Changes" comment="111">
-      <change beforePath="$PROJECT_DIR$/Continous/Data_prepocessing_Speech.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/Data_prepocessing_Text.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/Train_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/models/GRU.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/result.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/Data_prepocessing_Speech.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/Data_prepocessing_Text.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/models/GRU.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/result.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Continous_MELD/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_prepocessing_MELD/Data_prepocessing_Speech.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data_prepocessing_MELD/Data_prepocessing_Speech.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ogrin_task/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ogrin_task/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ogrin_task/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ogrin_task/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/Train_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ogrin_two_task/Train_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task/Final_f1.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task/Final_result.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/Final_f1.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/Final_result.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/Train_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/Train_data_pre.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/models/GRU.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/result.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-combine/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/Final_f1.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/Final_result.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/Train_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/Train_data_pre.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/models/GRU.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/result.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge-text/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/Final_f1.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/Final_result.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/Train_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/Train_data_pre.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/models/GRU.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/result.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Task_No_merge/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_Two_Task/Train_data.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_task/Train_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_task/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_task/models/GRU.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_task/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_task/result.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_task/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/Train_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/models/GRU.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/result.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ogrin_two_task/utils.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +65,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/SHIXIAOHAN/Desktop/Emotion-Recognition-Conversation",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/SHIXIAOHAN/Desktop/Emotion-Recognition-Conversation&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main (1)">
     <configuration name="Train_data (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Emotion-Recognition-Conversation" />
